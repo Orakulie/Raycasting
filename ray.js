@@ -15,28 +15,27 @@ class Ray {
 
     show() {
         if (this.min != Infinity) {
-           /*  ctx.strokeStyle = "white";
+            ctx.strokeStyle = "white";
             ctx.beginPath();
+            ctx.lineWidth = 2;
             ctx.moveTo(this.pos.x, this.pos.y);
             ctx.lineTo(this.pos.x + this.vek.x * this.min, this.pos.y + this.vek.y * this.min);
             ctx.stroke();
- */
+
             if (!this.eckPunkt) {
-                s1.points.push({ x: this.pos.x + this.vek.x * this.min, y: this.pos.y + this.vek.y * this.min, angle: Math.atan2(this.vek.y, this.vek.x) / Math.PI * 180, eckPunkt: this.eckPunkt });
+                s1.points.push({ x: this.pos.x + this.vek.x * this.min, y: this.pos.y + this.vek.y * this.min, angle: Math.atan2(this.vek.y, this.vek.x) / Math.PI * 180, eckPunkt: this.eckPunkt,vek:{x:this.vek.x,y:this.vek.y}});
             } else {
-                s1.points.push({ x: this.pos.x + this.vek.x * this.min, y: this.pos.y + this.vek.y * this.min, angle: Math.atan2(this.vek.y, this.vek.x) / Math.PI * 180, eckPunkt: this.eckPunkt, ray1: new Ray({ x: 0, y: 0 }, 0), ray2: new Ray({ x: 0, y: 0 }, 0) });
+                s1.points.push({ x: this.pos.x + this.vek.x * this.min, y: this.pos.y + this.vek.y * this.min, angle: Math.atan2(this.vek.y, this.vek.x) / Math.PI * 180,vek:{x:this.vek.x,y:this.vek.y}, eckPunkt: this.eckPunkt, ray1: new Ray({ x: 0, y: 0 }, 0), ray2: new Ray({ x: 0, y: 0 }, 0) });
             }
         }
     }
 
     draw() {
         if (this.min != Infinity) {
-            /* ctx.strokeStyle = "white";
-            ctx.beginPath();
-            ctx.moveTo(this.pos.x, this.pos.y);
+
+            ctx.lineWidth = 1;
             ctx.lineTo(this.pos.x + this.vek.x * this.min, this.pos.y + this.vek.y * this.min);
-            ctx.stroke(); */
-            return {x:this.pos.x + this.vek.x * this.min,y:this.pos.y + this.vek.y * this.min};
+
         }
     }
 

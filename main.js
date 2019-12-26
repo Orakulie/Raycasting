@@ -9,6 +9,7 @@ let ecken = [];
 var rect = canvas.getBoundingClientRect();
 let s1;
 
+let fill = true;
 
 start();
 

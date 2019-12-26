@@ -24,55 +24,69 @@ class Source {
 
         this.updateRays();
 
-        /*  let offset = 50;
-         let winkel = 10 * Math.PI /180;
-         for(let p = 0; p < this.points.length; p+=3) {
-             if(this.points[p].eckPunkt == true) {
-             let pos = {x:this.points[p].x,y:this.points[p].y};
-             let pos1 = {x:this.points[p+1].x,y:this.points[p+1].y};
-             let pos2 = {x:this.points[p+2].x,y:this.points[p+2].y};
- 
-             let angle = this.points[p].angle;
- 
- 
-             angle = angle * Math.PI / 180;
- 
-             ctx.beginPath();
-             this.points[p].ray1.pos = {x:pos.x,y:pos.y};
-             this.points[p].ray1.vek = {x:Math.cos(angle-winkel), y:Math.sin(angle-winkel)}
-             for (let wall of wände) {
-                 this.points[p].ray1.intersect(wall);
-             }
-             ctx.moveTo(pos.x,pos.y);
-             if(this.points[p].ray1.draw())
-                 ctx.lineTo(this.points[p].ray1.draw().x,this.points[p].ray1.draw().y);
-             ctx.lineTo(pos2.x,pos2.y);
-             ctx.strokeStyle = "red";
-             ctx.stroke();
-             ctx.fillStyle = "darkgreen";
-             ctx.fill();
- 
-             this.points[p].ray2.pos = {x:pos.x,y:pos.y};
-             this.points[p].ray2.vek = {x:Math.cos(angle+winkel), y:Math.sin(angle+winkel)}
-             for (let wall of wände) {
-                 this.points[p].ray2.intersect(wall);
-             }
-             ctx.moveTo(pos.x,pos.y);
-             if(this.points[p].ray2.draw())
-                 ctx.lineTo(this.points[p].ray2.draw().x,this.points[p].ray2.draw().y);
-             ctx.lineTo(pos1.x,pos1.y);
-             ctx.strokeStyle = "red";
-             ctx.stroke();
-             ctx.fillStyle = "darkgreen";
-             ctx.fill();
-             //ctx.lineTo(pos1.x-offset,pos1.y-offset);
-            // ctx.lineTo(pos2.x,pos2.y);
- 
-         }
-         } */
+        let offset = 50;
+        let winkel = 5 * Math.PI / 180;
+        for (let p = 0; p < this.points.length-3; p += 3) {
+            if (this.points[p].eckPunkt == true) {
+
+                let ray1 = this.points[p].ray1;
+                let ray2 = this.points[p].ray2;
+
+                let pos = { x: this.points[p].x, y: this.points[p].y };
+                let pos1 = { x: this.points[p + 1].x, y: this.points[p + 1].y };
+                let pos2 = { x: this.points[p + 2].x, y: this.points[p + 2].y };
+
+                let angle = this.points[p].angle;
 
 
-        this.fillArea();
+                angle = angle * Math.PI / 180;
+                let pointVek = this.points[p].vek;
+                ctx.beginPath();
+
+                ray1.pos = { x: pos.x, y: pos.y };
+                ray1.vek = { x: Math.cos(angle - winkel), y: Math.sin(angle - winkel) };
+
+                for (let wall of wände) {
+                    ray1.intersect(wall);
+                }
+
+                ctx.moveTo(pos.x, pos.y);
+
+                ray1.draw();
+
+                    //ctx.lineTo(pos.x + this.points[p + 1].vek.x, pos.y + this.points[p + 1].vek.y);
+                ctx.lineWidth = 5;
+                ctx.lineTo(pos1.x,pos1.y);
+                ctx.lineTo(pos.x,pos.y);
+
+                /* ctx.strokeStyle = "red";
+                ctx.stroke(); */
+                ctx.fillStyle = "grey";
+               // ctx.fill();
+                /* ctx.fillStyle = "darkgreen";
+                ctx.fill();
+
+                this.points[p].ray2.pos = { x: pos.x, y: pos.y };
+                this.points[p].ray2.vek = { x: Math.cos(angle + winkel), y: Math.sin(angle + winkel) }
+                for (let wall of wände) {
+                    this.points[p].ray2.intersect(wall);
+                }
+                ctx.moveTo(pos.x, pos.y);
+                if (this.points[p].ray2.draw())
+                    ctx.lineTo(this.points[p].ray2.draw().x, this.points[p].ray2.draw().y);
+                ctx.lineTo(pos1.x, pos1.y);
+                ctx.strokeStyle = "red";
+                ctx.stroke();
+                ctx.fillStyle = "darkgreen";
+                ctx.fill(); */
+                //ctx.lineTo(pos1.x-offset,pos1.y-offset);
+                // ctx.lineTo(pos2.x,pos2.y);
+
+            }
+        }
+
+        if(fill)
+            this.fillArea();
 
     }
 
@@ -89,11 +103,11 @@ class Source {
             ray.zielEcke = ecken.indexOf(ecke);
             ray.offsetRay = 0;
             this.rays.push(ray);
-            ray = new Ray(this.pos, { x:Math.cos(Math.atan2(ecke.y - this.pos.y,ecke.x - this.pos.x)+this.offset), y: Math.sin(Math.atan2(ecke.y - this.pos.y,ecke.x - this.pos.x)+this.offset)});
+            ray = new Ray(this.pos, { x: Math.cos(Math.atan2(ecke.y - this.pos.y, ecke.x - this.pos.x) + this.offset), y: Math.sin(Math.atan2(ecke.y - this.pos.y, ecke.x - this.pos.x) + this.offset) });
             ray.zielEcke = ecken.indexOf(ecke);
             ray.offsetRay = 1;
             this.rays.push(ray);
-            ray = new Ray(this.pos, { x:Math.cos(Math.atan2(ecke.y - this.pos.y,ecke.x - this.pos.x)-this.offset), y: Math.sin(Math.atan2(ecke.y - this.pos.y,ecke.x - this.pos.x)-this.offset)});
+            ray = new Ray(this.pos, { x: Math.cos(Math.atan2(ecke.y - this.pos.y, ecke.x - this.pos.x) - this.offset), y: Math.sin(Math.atan2(ecke.y - this.pos.y, ecke.x - this.pos.x) - this.offset) });
             ray.zielEcke = ecken.indexOf(ecke);
             ray.offsetRay = 2;
             this.rays.push(ray);
@@ -129,16 +143,16 @@ class Source {
                 ray.vek.y = ecken[ray.zielEcke].y - ray.pos.y;
             }
             if (ray.offsetRay == 1) {
-             //   ray.vek.x = ecken[ray.zielEcke].x - ray.pos.x - this.offset;
-                ray.vek.x = Math.cos(Math.atan2(ecken[ray.zielEcke].y - ray.pos.y,ecken[ray.zielEcke].x - ray.pos.x)+this.offset);
+                //   ray.vek.x = ecken[ray.zielEcke].x - ray.pos.x - this.offset;
+                ray.vek.x = Math.cos(Math.atan2(ecken[ray.zielEcke].y - ray.pos.y, ecken[ray.zielEcke].x - ray.pos.x) + this.offset);
                 //ray.vek.y = ecken[ray.zielEcke].y - ray.pos.y + this.offset;
-                ray.vek.y = Math.sin(Math.atan2(ecken[ray.zielEcke].y - ray.pos.y,ecken[ray.zielEcke].x - ray.pos.x)+this.offset);
+                ray.vek.y = Math.sin(Math.atan2(ecken[ray.zielEcke].y - ray.pos.y, ecken[ray.zielEcke].x - ray.pos.x) + this.offset);
             }
             if (ray.offsetRay == 2) {
                 /* ray.vek.x = ecken[ray.zielEcke].x - ray.pos.x + this.offset;
                 ray.vek.y = ecken[ray.zielEcke].y - ray.pos.y - this.offset; */
-                ray.vek.x = Math.cos(Math.atan2(ecken[ray.zielEcke].y - ray.pos.y,ecken[ray.zielEcke].x - ray.pos.x)-this.offset);
-                ray.vek.y = Math.sin(Math.atan2(ecken[ray.zielEcke].y - ray.pos.y,ecken[ray.zielEcke].x - ray.pos.x)-this.offset);
+                ray.vek.x = Math.cos(Math.atan2(ecken[ray.zielEcke].y - ray.pos.y, ecken[ray.zielEcke].x - ray.pos.x) - this.offset);
+                ray.vek.y = Math.sin(Math.atan2(ecken[ray.zielEcke].y - ray.pos.y, ecken[ray.zielEcke].x - ray.pos.x) - this.offset);
 
             }
             ray.min = Infinity;
