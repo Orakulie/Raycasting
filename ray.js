@@ -17,7 +17,7 @@ class Ray {
         if (this.min != Infinity) {
             ctx.strokeStyle = "white";
             ctx.beginPath();
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 1;
             ctx.moveTo(this.pos.x, this.pos.y);
             ctx.lineTo(this.pos.x + this.vek.x * this.min, this.pos.y + this.vek.y * this.min);
             ctx.stroke();

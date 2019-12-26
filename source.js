@@ -24,7 +24,7 @@ class Source {
 
         this.updateRays();
 
-        let offset = 50;
+       /*  let offset = 50;
         let winkel = 5 * Math.PI / 180;
         for (let p = 0; p < this.points.length-3; p += 3) {
             if (this.points[p].eckPunkt == true) {
@@ -53,16 +53,14 @@ class Source {
                 ctx.moveTo(pos.x, pos.y);
 
                 ray1.draw();
-
-                    //ctx.lineTo(pos.x + this.points[p + 1].vek.x, pos.y + this.points[p + 1].vek.y);
                 ctx.lineWidth = 5;
                 ctx.lineTo(pos1.x,pos1.y);
                 ctx.lineTo(pos.x,pos.y);
 
                 /* ctx.strokeStyle = "red";
                 ctx.stroke(); */
-                ctx.fillStyle = "grey";
-               // ctx.fill();
+               // ctx.fillStyle = "grey";
+              //  ctx.fill();
                 /* ctx.fillStyle = "darkgreen";
                 ctx.fill();
 
@@ -82,8 +80,8 @@ class Source {
                 //ctx.lineTo(pos1.x-offset,pos1.y-offset);
                 // ctx.lineTo(pos2.x,pos2.y);
 
-            }
-        }
+          //  }
+       // } 
 
         if(fill)
             this.fillArea();
