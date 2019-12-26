@@ -9,7 +9,7 @@ class Wand {
     show() {
         ctx.strokeStyle = "white";
         ctx.beginPath();
-        ctx.lineWidth = 5;
+        ctx.lineWidth = 4;
         ctx.moveTo(this.a.x, this.a.y);
         ctx.lineTo(this.b.x, this.b.y);
         ctx.stroke();
